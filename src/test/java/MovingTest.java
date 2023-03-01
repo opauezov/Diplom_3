@@ -16,12 +16,12 @@ import pojos.UserRequest;
 
 public class MovingTest extends BaseTest {
 
-    LoginPage loginPage;
-    MainPage mainPage;
-    AccountPage accountPage;
-    UserRequest testUser;
-    String accessToken;
-    SignInRequest signInRequest;
+    private LoginPage loginPage;
+    private MainPage mainPage;
+    private AccountPage accountPage;
+    private UserRequest testUser;
+    private String accessToken;
+    private SignInRequest signInRequest;
 
     @Before
     public void startTest() {

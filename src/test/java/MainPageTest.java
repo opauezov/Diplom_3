@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import pajeobject.MainPage;
 
 public class MainPageTest extends BaseTest {
-    MainPage mainPage;
+    private MainPage mainPage;
 
     @Before
     public void start() {

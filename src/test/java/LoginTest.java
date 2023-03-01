@@ -18,14 +18,14 @@ import pojos.UserRequest;
 
 public class LoginTest extends BaseTest {
 
-    MainPage mainPage;
-    RegistrationPage registrationPage;
+    private MainPage mainPage;
+    private RegistrationPage registrationPage;
 
-    PasswordRecoveryPage passwordRecoveryPage;
-    LoginPage loginPage;
-    String accessToken;
-    UserRequest testUser;
-    SignInRequest signInRequest;
+    private PasswordRecoveryPage passwordRecoveryPage;
+    private LoginPage loginPage;
+    private String accessToken;
+    private UserRequest testUser;
+    private SignInRequest signInRequest;
 
     @Before
     public void start() {

@@ -2,6 +2,7 @@ import api_steps.UserSteps;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +12,10 @@ import pojos.SignInRequest;
 import pojos.SuccessSignInSignUpResponse;
 
 public class RegistrationTest extends BaseTest {
-    String password;
-    String name = RandomStringUtils.randomAlphanumeric(10);
-    String email;
-    RegistrationPage registrationPage;
+    private String password;
+    private String name = RandomStringUtils.randomAlphanumeric(10);
+    private String email;
+    private RegistrationPage registrationPage;
 
     @Before
     public void start() {
@@ -38,6 +39,10 @@ public class RegistrationTest extends BaseTest {
         registrationPage.waitSigInButton();
         Assert.assertTrue("Регистрация не была выполнена", displayed);
 
+    }
+
+    @After
+    public void deleteUser () {
         Response response = UserSteps.signInWithSignInRequest(new SignInRequest(email, password));
 
         if (response.getStatusCode() == 200) {
@@ -60,14 +65,7 @@ public class RegistrationTest extends BaseTest {
         Assert.assertEquals("Некорректный пароль", registrationPage.getIncorrectPasswordErrorText());
 
         boolean displayed = registrationPage.isVisibleIncorrectPasswordErrorText();
-        if (!displayed) {
-            Response response = UserSteps.signInWithSignInRequest(new SignInRequest(email, password));
-
-            if (response.getStatusCode() == 200) {
-                String accessToken = response.then().extract().as(SuccessSignInSignUpResponse.class).getAccessToken();
-                UserSteps.deleteUser(accessToken);
-            }
-        }
         Assert.assertTrue("Не была выведена ошибка о некорректном пароле", displayed);
     }
+
 }
